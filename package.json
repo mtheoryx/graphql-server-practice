@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/mtheoryx/graphql-server-practice/issues"
   },
-  "homepage": "https://github.com/mtheoryx/graphql-server-practice#readme"
+  "homepage": "https://github.com/mtheoryx/graphql-server-practice#readme",
+  "dependencies": {
+    "graphql": "0.8.2"
+  }
 }
