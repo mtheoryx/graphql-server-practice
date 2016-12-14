@@ -57,7 +57,16 @@ const videoType = new GraphQLObjectType({
 exports.videoType = videoType;
 
 const { connectionType: VideoConnection } = connectionDefinitions({
-    nodeType: videoType
+    nodeType: videoType,
+    connectionFields: () => ({
+        totalCount: {
+            type: GraphQLInt,
+            description: 'A count of the total number of objects in this connection.',
+            resolve: (conn) => {
+                return conn.edges.length;
+            }
+        }
+    })
 });
 
 const queryType = new GraphQLObjectType({
