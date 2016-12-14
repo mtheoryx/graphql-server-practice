@@ -19,7 +19,12 @@ const {
     createVideo
 } = require('./src/data');
 
-const { globalIdField } = require('graphql-relay');
+const {
+    globalIdField,
+    connectionDefinitions,
+    connectionFromPromisedArray,
+    connectionArgs,
+} = require('graphql-relay');
 
 const { nodeInterface, nodeField } = require('./src/node');
 
@@ -51,14 +56,22 @@ const videoType = new GraphQLObjectType({
 
 exports.videoType = videoType;
 
+const { connectionType: VideoConnection } = connectionDefinitions({
+    nodeType: videoType
+});
+
 const queryType = new GraphQLObjectType({
     name: 'QueryType',
     description: 'The root query type',
     fields:  {
         node: nodeField,
         videos: {
-            type: new GraphQLList(videoType),
-            resolve: getVideos,
+            type: VideoConnection,
+            args: connectionArgs,
+            resolve: (_, args) => connectionFromPromisedArray(
+                getVideos(),
+                args
+            )
 
         },
         video: {
