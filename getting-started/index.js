@@ -50,6 +50,7 @@ const queryType = new GraphQLObjectType({
                     type: new GraphQLNonNull(GraphQLID),
                     description: 'The id of the video. ',
                 },
+
             },
             resolve: (_, args) => {
                 return getVideoById(args.id);
