@@ -34,8 +34,17 @@ const createVideo = ({ title, duration, released }) => {
     return video;
 };
 
+const getObjectById = (type, id) => {
+    const types = {
+        video: getVideoById,
+    };
+
+    return types[type](id);
+};
+
 module.exports = {
     getVideoById: getVideoById,
     getVideos:    getVideos,
     createVideo:  createVideo,
+    getObjectById: getObjectById,
 };
