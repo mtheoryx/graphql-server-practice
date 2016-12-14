@@ -14,12 +14,11 @@ const videoB = {
 
 const videos = [videoA, videoB];
 
-const getVideoById = (id) => new Promise(resolve => {
+const getVideoById = id => new Promise(resolve => {
     const [video] = videos.filter(video => video.id === id);
     resolve(video);
 });
 
-// exports.getVideoId = getVideoById;
 module.exports = {
     getVideoById: getVideoById
 };
